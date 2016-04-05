@@ -1,0 +1,24 @@
+? my ($commit) = @_;
+
+<p class="github-description">
+  <? if ($commit->{author}{url}) { ?>
+  <a href="<?= $commit->{author}{url} ?>" class="github-user"><?= $commit->{author}{login} ?></a>
+  <? } ?>
+  <a href="<?= $commit->{commit}{url} ?>"><?= $commit->{commit}{message} ?></a>
+</p>
+? for my $file (@{$commit->{files}}) {
+<div class="github-change">
+  <a href="<?= $file->{blob_url} ?>" target="_blank" onclick='var f=this.parentNode.getElementsByClassName("github-file")[0];f.className="github-file"+(f.className.match(/visible/)?"":" visible");event.preventDefault();'><?= $file->{filename} ?></a>
+  <span class="github-stats">
+? if ($file->{additions}) {
+    <span class="github-addition">+<?= $file->{additions} ?></span>
+? }
+? if ($file->{deletions}) {
+    <span class="github-deletion">-<?= $file->{deletions} ?></span>
+? }
+  </span>
+  <div class="github-file">
+    <?= $file->{patch} ?>
+  </div>
+</div>
+? }

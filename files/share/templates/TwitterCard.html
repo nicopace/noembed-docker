@@ -1,0 +1,5 @@
+? my $data = shift;
+
+<? if ($data->{image}) { ?><img src="<?= $data->{image} ?>" width="50" height="50"><? } ?>
+<h2><a href="<?= $data->{url} ?>"><?= $data->{title} ?></a></h2>
+<p><?= $data->{description} ?></p>
